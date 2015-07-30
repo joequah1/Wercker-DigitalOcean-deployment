@@ -1,9 +1,22 @@
 # Wercker-DigitalOcean-deployment
+
 Deploy Repository from BitBucket to DigitalOcean using Wercker
 
-
-
 # Set up in BitBucket
+
+All you have to do is generate key in Digital Ocean, and add the Public Key to Bitbucket.
+
+Go to settings 
+
+![Bitbucket settings](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_16.png)
+
+Deployment keys
+
+![Bitbucket deployment keys](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_17.png)
+
+Past your Public Key in here
+
+![Paste Public Key](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_18.png)
 
 # Set up Git in Digital Ocean 
 
@@ -94,15 +107,21 @@ Set up a project is very easy and straigtforward, so I will be discussing about 
 
 ## Configure Wercker and DigitalOcean
 
-Go to settings -> SSH keys -> Generate new key pair -> name for key -> copy Public Key -> add it into server
+Go to settings
 
-![Go to setting](http://postimg.org/image/cojcfya7x/)
+![Go to setting](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_1.png)
 
-![Go to SSH Keys Dashboard](http://postimg.org/image/uvau160xp/)
+Select SSH keys in the left panel
 
-![Generate new Key Pair](http://postimg.org/image/wx6q1o9j1/)
+![Go to SSH Keys Dashboard](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_2.png)
 
-![Copy Public Key](http://postimg.org/image/teuq5a8n1/)
+Generate anew SSH Key Pair
+
+![Generate new Key Pair](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_3.png)
+
+Copy the public key
+
+![Copy Public Key](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_4.png)
 
 Add Public Key to your server, by running the following command
 
@@ -113,7 +132,60 @@ Add Public Key to your server, by running the following command
 
 ## Create Deploy Target
 
+Wercker doesn't support deploy to Digital Ocean yet, so we will need to set up a custom deploy
     
+So visit the Deploy Targets tab, and select custom deploy from the dropdown.
+
+![Select custom deploy](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_5.png)
+
+Next, insert name for the deploy target name.
+There's a autodeploy option which you can select. It will auto deploy on successful build, either on master or branches. For now we will continue without auto deploy.
+
+![Insert deploy target name](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_6.png)
+
+After hitting save, you can set environment variables. Environment variables are variables which stored necessary value which we will be use later for deployment. There are a few variables needed, which I will explain the usage later.
+
+First variable to add will be the SSH Key
+
+![Add SSH Key Variable](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_7.png)
+
+Second variable will be GIT which is our git directory in Digital Ocean
+
+![Add GIT](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_8.png)
+
+Third variable is HOSTNAME which will be storing the Digital Ocean droplet IP address. And remember to set it to Protected.
+
+![Add HOSTNAME](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_9.png)
+
+Next variable is WORK_TREE which will store your production repository path in your droplet.
+
+![Add WORK_TREE](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_10.png)
+
+Lastly will be variable TYPE, the value will be FULL or PARTIAL. Lets go with FULL for this first.
+
+![Add TYPE](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_11.png)
+
+## Deploy
+
+With everything set, you can start testing now. Get the wercker.yml file, and put it in your project's root directory.
+Then commit and push it to your master or production branch.
+
+Once you have successfully push, Wercker will automatically build your project. 
+
+![Wercker build project](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_12.png)
+
+After the build is finish, click on it and you will be redirect to this page.
+
+![Wercker deploy page](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_13.png)
+
+Next select deploy to the deploy target you had just created. 
+
+![Wercker deploy](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_14.png)
+
+Wait for a few minutes, and walla. You are done!
+
+![Deploy success](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_15.png)
+
 
 ### References
 
