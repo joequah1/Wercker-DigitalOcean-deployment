@@ -2,9 +2,26 @@
 
 Deploy Repository from BitBucket to DigitalOcean using Wercker
 
+#Index 
+
+- [Set up in BitBucket](#set-up-in-bitbucket)
+- [Set up Git in Digital Ocean](#set-up-git-in-digital-ocean)
+  - [Set up a web server](#set-up-a-web-server)
+  - [Create a project repo](#create-a-project-repo)
+  - [Configure Git](#configure-git)
+  - [Update your repo from production](#update-your-repo-from-production)
+    - [Full Update](#full-update)
+    - [Partial Update](#partial-update)
+- [Set up in Wercker](#set-up-in-wercker)
+  - [Configure Wercker and DigitalOcean](#configure-wercker-and-digitalocean)
+  - [Create Deploy Target](#create-deploy-target)
+  
+
 # Set up in BitBucket
 
-All you have to do is generate key in Digital Ocean, and add the Public Key to Bitbucket.
+First, you will need to generate a SSH key pairs for your server which will be Digital Ocean in this tutorial, to be able to rub GIT from your BitBucket. I won't be telling you how to generate a SSH key pairs, you can google or refer to this [link](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
+
+Therefore, I will only be showing you on how to add the public key to Bitbucket, so you can use GIT to clone, fetch, check etc from your Digital Ocean's droplet.
 
 Go to settings 
 
@@ -14,7 +31,7 @@ Deployment keys
 
 ![Bitbucket deployment keys](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_17.png)
 
-Past your Public Key in here
+Past your Public Key in here and you are done
 
 ![Paste Public Key](http://images.ninjoe.org/github/wercker-digitalocean-deployment/configure_wercker_digitalocean_18.png)
 
@@ -101,7 +118,7 @@ Then we will remove those deleted file which this
 
 Ps. I can't really explain into details, I explaining of what I know of only :)
 
-# Setup in Wercker
+# Set up in Wercker
 
 Set up a project is very easy and straigtforward, so I will be discussing about it now.
 
